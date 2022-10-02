@@ -5,8 +5,7 @@ import com.example.demo.types.Person;
 
 import javax.validation.Valid;
 
-public class RegistrationRequest
-{
+public class RegistrationRequest{
         /*required:
         - person
         - registrationDate

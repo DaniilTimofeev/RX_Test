@@ -2,7 +2,7 @@ package com.example.demo.responsetype.errors;
 
 import com.example.demo.responsetype.ReturnType;
 
-public class FieldError implements ReturnType {
+public class FieldError {
 
     private String field;//optional
 

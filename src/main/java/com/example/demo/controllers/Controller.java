@@ -1,9 +1,10 @@
 package com.example.demo.controllers;
 
+import com.example.demo.responsetype.errors.Error;
+import com.example.demo.responsetype.errors.ErrorWrapper;
 import com.example.demo.responsetype.success.RegistrationResponse;
-import com.example.demo.registration.GetRegistrationResponse;
+import com.example.demo.responsetype.success.GetRegistrationResponse;
 import com.example.demo.registration.RegistrationRequest;
-import com.example.demo.responsetype.ReturnType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,18 +27,22 @@ public class Controller {
 
 //SWAP RETURN TYPE TO ResponseEntity<String>
     @GetMapping("/api/v1/registrations/{registrationId}")
-    public ResponseEntity<ReturnType> getController(@PathVariable String registrationId,
+    public ResponseEntity<?> getController(@PathVariable String registrationId,
                                                     @RequestHeader(value = "x-correlationid") String x_correlationid){
+        ResponseEntity entity;
 
-        GetRegistrationResponse responseOBJ = repository.get(x_correlationid);
-//                .orElseThrow(() -> new Error("404", "User by registrationId = [" + registrationId +"] was not found"));
 
+        try {
+            GetRegistrationResponse responseOBJ = repository.get(x_correlationid);
+            responseOBJ.id.equals(registrationId);
+            entity = new ResponseEntity(responseOBJ, HttpStatus.OK);
+
+        }catch(NullPointerException npe){
+            //return
+            entity = new ResponseEntity<>(new ErrorWrapper(new Error("InternalServerError", "User with [" + registrationId + "] registration id as not found "), null), HttpStatus.NOT_FOUND);
+        }
 
         //add check for UUID
-        responseOBJ.id.equals(registrationId);
-
-
-        ResponseEntity entity = new ResponseEntity(responseOBJ, HttpStatus.OK);
 
 
 
@@ -52,7 +57,7 @@ public class Controller {
 
     //SWAP RETURN TYPE TO ResponseEntity<STRING>
     @PostMapping("/api/v1/registrations")
-    public  ResponseEntity<ReturnType> postController(@Valid @RequestBody RegistrationRequest request, @RequestHeader(value = "x-correlationid") String x_correlationid){
+    public  ResponseEntity<?> postController(@Valid @RequestBody RegistrationRequest request, @RequestHeader(value = "x-correlationid") String x_correlationid){
 
         String userUUID = UUID.randomUUID().toString();
         repository.put(x_correlationid, new GetRegistrationResponse(request, userUUID));

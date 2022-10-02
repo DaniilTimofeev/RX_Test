@@ -1,11 +1,11 @@
 package com.example.demo.types;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 public class Person
 {
-
         /*required:
           - email
           - firstName
@@ -25,10 +25,7 @@ public class Person
     public String email;
     //example: jjbloggs @mailinator.com
 
-
-    Adress address;
-
-
+    public @Valid Adress address;
 
     //additionalProperties: false
 }

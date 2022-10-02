@@ -2,7 +2,7 @@ package com.example.demo.responsetype.errors;
 
 import com.example.demo.responsetype.ReturnType;
 
-public class ErrorResponse implements ReturnType {
+public class ErrorResponse{
 
     private Error error;
     private FieldError [] fieldErrors;// optional
@@ -12,14 +12,6 @@ public class ErrorResponse implements ReturnType {
         this.fieldErrors = fieldErrors;
     }
 
-
-    public Error getError(){
-        return this.error;
-    }
-
-    public FieldError[] getFieldError(){
-        return this.fieldErrors;
-    }
 
     //additionalProperties: false
 
