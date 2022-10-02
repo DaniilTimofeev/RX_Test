@@ -1,4 +1,8 @@
 package com.example.demo.types;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+
 public class Person
 {
 
@@ -8,20 +12,17 @@ public class Person
           - lastName
         */
 
+    @Size(min = 1, max = 150)
     public String firstName;
-
-    //maxLength: 150
-    //minLength:
     //example: Joe
 
+    @Size(min = 1, max = 150)
     public String lastName;
-    //maxLength: 150
-    //minLength: 1
     //example: Bloggs
 
+    @Email
+    @Size(min = 1, max = 254)
     public String email;
-    //maxLength: 254
-    //minLength:
     //example: jjbloggs @mailinator.com
 
 

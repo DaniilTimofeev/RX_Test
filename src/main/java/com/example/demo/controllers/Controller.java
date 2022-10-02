@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -51,21 +52,13 @@ public class Controller {
 
     //SWAP RETURN TYPE TO ResponseEntity<STRING>
     @PostMapping("/api/v1/registrations")
-    public  ResponseEntity<ReturnType> postController(@RequestBody RegistrationRequest request, @RequestHeader(value = "x-correlationid") String x_correlationid){
-
+    public  ResponseEntity<ReturnType> postController(@Valid @RequestBody RegistrationRequest request, @RequestHeader(value = "x-correlationid") String x_correlationid){
 
         String userUUID = UUID.randomUUID().toString();
         repository.put(x_correlationid, new GetRegistrationResponse(request, userUUID));
-
-//        return new RegistrationResponse(userUUID);
-
         return new ResponseEntity<>(new RegistrationResponse(userUUID), HttpStatus.CREATED);
 
-//        repository
-        //Takes RegistrationRequest(HEADER) as a parameter
-        //SHOULD FORM GetRegistrationResponse object
         // returns RegistrationResponse, ErrorResponse or Error
-//        return null;
     }
 
 

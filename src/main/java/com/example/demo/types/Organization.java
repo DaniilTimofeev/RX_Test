@@ -1,4 +1,7 @@
 package com.example.demo.types;
+
+import javax.validation.constraints.Size;
+
 public class Organization
 {
 
@@ -9,10 +12,8 @@ public class Organization
         */
 
 
-
+    @Size(min = 1, max = 120)
     public String name;
-    //maxLength: 120
-    //minLength: 1
     //example: Acme Ltd
 
     public Adress address;

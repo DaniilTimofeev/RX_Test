@@ -3,6 +3,8 @@ package com.example.demo.registration;
 import com.example.demo.types.Organization;
 import com.example.demo.types.Person;
 
+import javax.validation.Valid;
+
 public class RegistrationRequest
 {
         /*required:
@@ -16,9 +18,9 @@ public class RegistrationRequest
     //example: '2020-05-21T23:11:46.5983455+03:00'
     public String locale;
     //example: en
-    public Person person;
+    public @Valid Person person;
 
-    public Organization organisation;
+    public @Valid Organization organisation;
 
 
 

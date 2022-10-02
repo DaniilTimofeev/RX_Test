@@ -13,13 +13,11 @@ public class ErrorResponse implements ReturnType {
     }
 
 
-    public Error getError()
-    {
+    public Error getError(){
         return this.error;
     }
 
-    public FieldError[] getFieldError()
-    {
+    public FieldError[] getFieldError(){
         return this.fieldErrors;
     }
 

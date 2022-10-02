@@ -7,20 +7,9 @@ public class Error extends RuntimeException implements ReturnType {
 
     private final String message;//Optional
 
-    public Error(String code, String message)
-    {
+    public Error(String code, String message)    {
         this.code = code;
         this.message = message;
-    }
-
-    public String getCode()
-    {
-        return this.code;
-    }
-
-    public String getMessage()
-    {
-        return this.message;
     }
 
     //additionalProperties: false

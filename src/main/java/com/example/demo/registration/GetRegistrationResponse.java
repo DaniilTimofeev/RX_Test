@@ -5,6 +5,7 @@ import com.example.demo.responsetype.ReturnType;
 import com.example.demo.types.Organization;
 import com.example.demo.types.Person;
 
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -28,9 +29,9 @@ public class GetRegistrationResponse implements ReturnType {
     public String locale;
     //example: en
 
-    Person person;
+    public @Valid Person person;
 
-    Organization organisation;
+    public @Valid Organization organisation;
 
     public GetRegistrationResponse(RegistrationRequest request, String id){
         this.id = id;
