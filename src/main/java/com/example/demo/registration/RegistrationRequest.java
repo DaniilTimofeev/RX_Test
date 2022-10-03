@@ -17,11 +17,9 @@ public class RegistrationRequest{
     //example: '2020-05-21T23:11:46.5983455+03:00'
     public String locale;
     //example: en
-    public @Valid Person person;
+    public Person person;
 
-    public @Valid Organization organisation;
+    public Organization organisation;
 
 
-
-    // additionalProperties: false
 }

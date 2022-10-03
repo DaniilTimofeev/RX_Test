@@ -11,7 +11,6 @@ public class ErrorResponse{
     }
 
 
-    //additionalProperties: false
 
 
 }

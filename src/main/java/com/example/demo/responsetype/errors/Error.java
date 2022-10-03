@@ -10,5 +10,4 @@ public class Error{
         this.message = message;
     }
 
-    //additionalProperties: false
 }

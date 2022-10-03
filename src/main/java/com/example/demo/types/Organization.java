@@ -12,9 +12,8 @@ public class Organization
 
     @Size(min = 1, max = 120)
     public String name;
-    //example: Acme Ltd
 
-    public @Valid Adress address;
+    @Valid
+    public Adress address;
 
-    //additionalProperties: false
 }

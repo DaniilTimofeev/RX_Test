@@ -35,21 +35,15 @@ public class Controller {
                                                     @NotNull @NotEmpty @RequestHeader(value = "x-correlationid") String x_correlationid){
         ResponseEntity entity;
         try {
-
-            if(x_correlationid.equals("cyberpunk2077"))
-                return new ResponseEntity(new ErrorWrapper(new Error("InternalServerError", "We are sorry, the problem is on our side"), null), HttpStatus.INTERNAL_SERVER_ERROR);
-
             GetRegistrationResponse responseOBJ = repository.get(x_correlationid);
             if(responseOBJ.id.equals(registrationId)==false)
                 throw new NullPointerException();
+
             return new ResponseEntity(responseOBJ, HttpStatus.OK);
         }catch(NullPointerException npe) {
             return new ResponseEntity(new ErrorWrapper(new Error("InternalServerError", "User with [" + registrationId + "] registration id and [" + x_correlationid + "] x_correlationid was not found "), null), HttpStatus.NOT_FOUND);
         }
-        // Retuns GetRegistrationResponse, Error
     }
-
-
 
 
     @PostMapping("/api/v1/registrations")
@@ -59,21 +53,21 @@ public class Controller {
         repository.put(x_correlationid, new GetRegistrationResponse(request, userUUID));
         return new ResponseEntity<>(new RegistrationResponse(userUUID), HttpStatus.CREATED);
 
-        // returns RegistrationResponse, ErrorResponse or Error
     }
 
 
 
-
-    ///ADD CHECK @Valid
-
-
-
-
-
-
-//    @DeleteMapping("/employees/{id}")
-//    void deleteEmployee(@PathVariable Long id) {
-//        repository.deleteById(id);
-//    }
+    @DeleteMapping("/api/v1/registrations/{registrationId}")
+    public ResponseEntity<?> deleteRegistered(@PathVariable String registrationId,
+                                                    @NotNull @NotEmpty @RequestHeader(value = "x-correlationid") String x_correlationid) {
+        try{
+            if(repository.get(x_correlationid).id.equals(registrationId))
+                repository.remove(x_correlationid);
+            else
+                throw new NullPointerException();
+        }catch(NullPointerException ex){
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

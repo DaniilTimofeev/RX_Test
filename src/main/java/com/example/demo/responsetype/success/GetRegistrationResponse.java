@@ -17,20 +17,17 @@ public class GetRegistrationResponse {
 
     public String id;
 
-    //  format: uuid
 
 
     public String registrationDate;
-    // format: date-time
-    // example: '2020-05-21T23:11:46.5983455+03:00'
-
 
     public String locale;
-    //example: en
 
-    public @Valid Person person;
+    @Valid
+    public Person person;
 
-    public @Valid Organization organisation;
+    @Valid
+    public Organization organisation;
 
     public GetRegistrationResponse(RegistrationRequest request, String id){
         this.id = id;
@@ -41,5 +38,4 @@ public class GetRegistrationResponse {
     }
 
 
-    //additionalProperties: false
 }

@@ -14,18 +14,18 @@ public class Person
 
     @Size(min = 1, max = 150)
     public String firstName;
-    //example: Joe
+
 
     @Size(min = 1, max = 150)
     public String lastName;
-    //example: Bloggs
+
 
     @Email
     @Size(min = 1, max = 254)
     public String email;
-    //example: jjbloggs @mailinator.com
 
-    public @Valid Adress address;
+    @Valid
+    public Adress address;
 
-    //additionalProperties: false
+
 }
