@@ -1,5 +1,9 @@
 package com.example.demo;
 
+import com.example.demo.responsetype.errors.Error;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.text.SimpleDateFormat;
@@ -20,7 +24,9 @@ public class main {
 //
 //        System.out.println(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault()).format(new Date()));
 
+        String asdas = "responseOBsadJ";
 
+        System.out.println(new ResponseEntity(new Error("InternalServerError", "User with [" + "eqwewqewqewqeqw" + "] registration id and [" + 1234 + "] x_correlationid was not found "), HttpStatus.NOT_FOUND));
 
     }
 }

@@ -10,52 +10,38 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.UUID;
 
 
 @RestController
 public class Controller {
-
-//    private final UserRepository repository;
     private final HashMap<String, GetRegistrationResponse> repository;
 
     Controller() {
-//        this.repository = repository;
         repository = new HashMap<>();
     }
 
-//SWAP RETURN TYPE TO ResponseEntity<String>
     @GetMapping("/api/v1/registrations/{registrationId}")
     public ResponseEntity<?> getController(@PathVariable String registrationId,
-                                                    @RequestHeader(value = "x-correlationid") String x_correlationid){
+                                                    @NotNull @NotEmpty @RequestHeader(value = "x-correlationid") String x_correlationid){
         ResponseEntity entity;
-
-
         try {
             GetRegistrationResponse responseOBJ = repository.get(x_correlationid);
-            responseOBJ.id.equals(registrationId);
-            entity = new ResponseEntity(responseOBJ, HttpStatus.OK);
-
-        }catch(NullPointerException npe){
-            //return
-            entity = new ResponseEntity<>(new ErrorWrapper(new Error("InternalServerError", "User with [" + registrationId + "] registration id as not found "), null), HttpStatus.NOT_FOUND);
+            if(responseOBJ.id.equals(registrationId)==false)
+                throw new NullPointerException();
+            return new ResponseEntity(responseOBJ, HttpStatus.OK);
+        }catch(NullPointerException npe) {
+            return new ResponseEntity(new ErrorWrapper(new Error("InternalServerError", "User with [" + registrationId + "] registration id and [" + x_correlationid + "] x_correlationid was not found "), null), HttpStatus.NOT_FOUND);
         }
-
-        //add check for UUID
-
-
-
-        return  entity;
-
-        //Human friendly error message
-        //TAKES registrationId(PATH) AND x-correlationid(HEADER) AS PARAMETERS
         // Retuns GetRegistrationResponse, Error
-        //SHOULD ADD SEARCHING BY ID IF STORAGE LIST
-
     }
 
-    //SWAP RETURN TYPE TO ResponseEntity<STRING>
+
+
+
     @PostMapping("/api/v1/registrations")
     public  ResponseEntity<?> postController(@Valid @RequestBody RegistrationRequest request, @RequestHeader(value = "x-correlationid") String x_correlationid){
 

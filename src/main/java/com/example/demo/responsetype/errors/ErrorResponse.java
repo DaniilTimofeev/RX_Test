@@ -1,7 +1,5 @@
 package com.example.demo.responsetype.errors;
 
-import com.example.demo.responsetype.ReturnType;
-
 public class ErrorResponse{
 
     private Error error;

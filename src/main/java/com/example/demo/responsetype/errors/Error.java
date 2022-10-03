@@ -1,11 +1,9 @@
 package com.example.demo.responsetype.errors;
 
-import com.example.demo.responsetype.ReturnType;
+public class Error{
+    public final String  code;//Optional
 
-public class Error extends RuntimeException {
-    private final String  code;//Optional
-
-    private final String message;//Optional
+    public final String message;//Optional
 
     public Error(String code, String message)    {
         this.code = code;

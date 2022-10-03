@@ -1,7 +1,6 @@
 package com.example.demo.responsetype.success;
 
 import com.example.demo.registration.RegistrationRequest;
-import com.example.demo.responsetype.ReturnType;
 import com.example.demo.types.Organization;
 import com.example.demo.types.Person;
 
