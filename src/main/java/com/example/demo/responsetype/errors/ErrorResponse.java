@@ -1,16 +1,14 @@
 package com.example.demo.responsetype.errors;
 
-public class ErrorResponse{
+public class ErrorResponse {
 
     private Error error;
-    private FieldError [] fieldErrors;// optional
+    private FieldError[] fieldErrors;// optional
 
-    public ErrorResponse(Error error, FieldError[] fieldErrors){
+    public ErrorResponse(Error error, FieldError[] fieldErrors) {
         this.error = error;
         this.fieldErrors = fieldErrors;
     }
-
-
 
 
 }

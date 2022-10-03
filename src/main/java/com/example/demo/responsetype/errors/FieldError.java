@@ -9,20 +9,21 @@ public class FieldError {
     private final String message;//optional
 
 
-    public FieldError(String field, String code, String message){
+    public FieldError(String field, String code, String message) {
         this.field = field;
         this.code = code;
         this.message = message;
     }
 
-    public String getField(){
+    public String getField() {
         return this.field;
     }
 
-    public String getCode(){
+    public String getCode() {
         return this.code;
     }
-    public String getMessage(){
+
+    public String getMessage() {
         return this.message;
     }
 

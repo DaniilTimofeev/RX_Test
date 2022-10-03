@@ -18,7 +18,6 @@ public class GetRegistrationResponse {
     public String id;
 
 
-
     public String registrationDate;
 
     public String locale;
@@ -29,7 +28,7 @@ public class GetRegistrationResponse {
     @Valid
     public Organization organisation;
 
-    public GetRegistrationResponse(RegistrationRequest request, String id){
+    public GetRegistrationResponse(RegistrationRequest request, String id) {
         this.id = id;
         this.person = request.person;
         this.registrationDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault()).format(new Date());

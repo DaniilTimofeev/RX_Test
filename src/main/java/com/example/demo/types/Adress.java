@@ -1,19 +1,15 @@
 package com.example.demo.types;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 
-
-public class Adress{
+public class Adress {
         /* required:
            - addressLine1
            - countryIsoCode
         */
 
     public String locale;
-
 
 
     @Size(min = 1, max = 150)

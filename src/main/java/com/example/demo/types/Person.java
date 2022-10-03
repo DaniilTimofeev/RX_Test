@@ -4,8 +4,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
-public class Person
-{
+public class Person {
         /*required:
           - email
           - firstName
