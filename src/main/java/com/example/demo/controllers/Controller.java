@@ -47,7 +47,10 @@ public class Controller {
     public ResponseEntity<?> postController(@Valid @RequestBody RegistrationRequest request, @RequestHeader(value = "x-correlationid") String x_correlationid) {
 
         String userUUID = UUID.randomUUID().toString();
-        repository.put(x_correlationid, new GetRegistrationResponse(request, userUUID));
+        if(request.registrationDate == null)
+            repository.put(x_correlationid, new GetRegistrationResponse(request, userUUID));
+        else
+            repository.put(x_correlationid, new GetRegistrationResponse(request, userUUID, request.registrationDate));
         return new ResponseEntity<>(new RegistrationResponse(userUUID), HttpStatus.CREATED);
 
     }

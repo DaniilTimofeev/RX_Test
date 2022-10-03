@@ -36,5 +36,14 @@ public class GetRegistrationResponse {
         this.organisation = request.organisation;
     }
 
+    public GetRegistrationResponse(RegistrationRequest request, String id, String registrationDate) {
+        this.id = id;
+        this.person = request.person;
+        this.registrationDate = registrationDate;
+        this.locale = request.locale;
+        this.organisation = request.organisation;
+
+    }
+
 
 }
