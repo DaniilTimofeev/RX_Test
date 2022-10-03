@@ -13,12 +13,14 @@ public class RegistrationRequest{
 
     
     public String registrationDate;
-    //format: date-time
-    //example: '2020-05-21T23:11:46.5983455+03:00'
+
     public String locale;
     //example: en
+
+    @Valid
     public Person person;
 
+    @Valid
     public Organization organisation;
 
 

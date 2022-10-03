@@ -12,7 +12,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -70,4 +72,16 @@ public class Controller {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
+
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> conflict(MethodArgumentNotValidException exception, @RequestBody RegistrationRequest request) {
+        ArrayList<String> errorList = new ArrayList<>();
+        for(FieldError error : exception.getFieldErrors())
+            errorList.add(error.getDefaultMessage());
+        return new ResponseEntity<>(errorList, HttpStatus.BAD_REQUEST);
+    }
+
 }
