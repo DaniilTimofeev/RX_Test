@@ -5,6 +5,7 @@ import com.example.demo.types.Organization;
 import com.example.demo.types.Person;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -17,11 +18,12 @@ public class GetRegistrationResponse {
 
     public String id;
 
-
+    @NotNull
     public String registrationDate;
 
     public String locale;
 
+    @NotNull
     @Valid
     public Person person;
 

@@ -1,5 +1,6 @@
 package com.example.demo.types;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -11,7 +12,7 @@ public class Adress {
 
     public String locale;
 
-
+    @NotNull
     @Size(min = 1, max = 150)
     public String addressLine1;
 
@@ -35,6 +36,7 @@ public class Adress {
     @Size(max = 60)
     public String postcode;
 
+    @NotNull
     @Size(min = 1)
     public String countryIsoCode;
 

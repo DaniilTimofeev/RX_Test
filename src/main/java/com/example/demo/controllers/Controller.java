@@ -6,15 +6,13 @@ import com.example.demo.responsetype.errors.ErrorWrapper;
 import com.example.demo.responsetype.success.GetRegistrationResponse;
 import com.example.demo.responsetype.success.RegistrationResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -43,11 +41,13 @@ public class Controller {
     }
 
 
-    @PostMapping("/api/v1/registrations")
+    @PostMapping(value = "/api/v1/registrations",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> postController(@Valid @RequestBody RegistrationRequest request, @RequestHeader(value = "x-correlationid") String x_correlationid) {
 
         String userUUID = UUID.randomUUID().toString();
-        if(request.registrationDate == null)
+        if (request.registrationDate == null)
             repository.put(x_correlationid, new GetRegistrationResponse(request, userUUID));
         else
             repository.put(x_correlationid, new GetRegistrationResponse(request, userUUID, request.registrationDate));
@@ -71,12 +71,6 @@ public class Controller {
     }
 
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> conflict(MethodArgumentNotValidException exception, @RequestBody RegistrationRequest request) {
-        ArrayList<String> errorList = new ArrayList<>();
-        for (FieldError error : exception.getFieldErrors())
-            errorList.add(error.getDefaultMessage());
-        return new ResponseEntity<>(errorList, HttpStatus.BAD_REQUEST);
-    }
+
 
 }

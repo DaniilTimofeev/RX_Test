@@ -2,11 +2,11 @@ package com.example.demo.responsetype.errors;
 
 public class FieldError {
 
-    private String field;//optional
+    public String field;//optional
 
-    private final String code;//optional
+    public final String code;//optional
 
-    private final String message;//optional
+    public final String message;//optional
 
 
     public FieldError(String field, String code, String message) {
@@ -14,19 +14,4 @@ public class FieldError {
         this.code = code;
         this.message = message;
     }
-
-    public String getField() {
-        return this.field;
-    }
-
-    public String getCode() {
-        return this.code;
-    }
-
-    public String getMessage() {
-        return this.message;
-    }
-
-
-    //additionalProperties: false
 }
