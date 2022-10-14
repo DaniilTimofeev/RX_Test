@@ -28,10 +28,9 @@ public class Controller {
     @GetMapping("/api/v1/registrations/{registrationId}")
     public ResponseEntity<?> getController(@PathVariable String registrationId,
                                            @NotNull @NotEmpty @RequestHeader(value = "x-correlationid") String x_correlationid) {
-        ResponseEntity entity;
         try {
             GetRegistrationResponse responseOBJ = repository.get(x_correlationid);
-            if (responseOBJ.id.equals(registrationId) == false)
+            if (!responseOBJ.id.equals(registrationId))
                 throw new NullPointerException();
 
             return new ResponseEntity(responseOBJ, HttpStatus.OK);
