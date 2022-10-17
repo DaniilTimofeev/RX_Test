@@ -198,7 +198,7 @@ public class PostGetRequest {
         //MediaType.APPLICATION_JSON_VALUE
         ClientResponse clientResponse = client.post()
             .uri("http://localhost:8080/api/v1/registrations")
-            .header("x_correlationid", x_correlationid)
+            .header("x-correlationid", x_correlationid)
             .contentType(MediaType.APPLICATION_JSON)
             .bodyValue(requestBody)
 //            .body(Mono.just((JSONObject) new JSONParser().parse(requestBody)), JSONObject.class)
@@ -210,8 +210,18 @@ public class PostGetRequest {
     }
 
 
-    public static ResponseEntity<String> sendGet(String requestBody,  String x_correlationid) {
-        return null;
+    public static ResponseEntity<String> sendGet(String registrationId,  String x_correlationid) {
+        WebClient client = WebClient.create();
+
+
+        //MediaType.APPLICATION_JSON_VALUE
+        ClientResponse clientResponse = client.get()
+            .uri("http://localhost:8080/api/v1/registrations/" + registrationId)
+            .header("x-correlationid", x_correlationid)
+            .exchange()
+            .block();
+
+        return clientResponse.toEntity(String.class).block();
     }
 
 }

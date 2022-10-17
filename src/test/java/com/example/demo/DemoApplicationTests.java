@@ -3,6 +3,9 @@ package com.example.demo;
 import static com.example.demo.utility.PostGetRequest.sendGet;
 import static com.example.demo.utility.PostGetRequest.sendPost;
 
+import com.example.demo.responsetype.success.GetRegistrationResponse;
+import com.example.demo.responsetype.success.RegistrationResponse;
+import com.google.gson.Gson;
 import net.minidev.json.parser.ParseException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,9 +26,17 @@ class DemoApplicationTests {
         String body = sendPost(getCreateExpertJsonString(), "12345").getBody();
 
         System.out.println(body);
-//        String registrationId = sendGET("/api/v1/registrations/1234");
-//        System.out.println("=============================================");
-//        sendPOST(getCreateExpertJsonString(), );
+
+        Gson g = new Gson();
+        RegistrationResponse s = g.fromJson(body, RegistrationResponse.class);
+
+        System.out.println(s.registrationId);
+
+        GetRegistrationResponse getRegistrationResponse = g.fromJson(sendGet(s.registrationId,"12345").getBody(), GetRegistrationResponse.class);
+        System.out.println(getRegistrationResponse.organisation.name);
+
+
+
     }
 
 
@@ -38,6 +49,9 @@ class DemoApplicationTests {
             + "      \"addressLine2\": \"28 The Quadrant\",\n" + "      \"addressLine3\": \"\",\n" + "      \"city\": \"Richmond\",\n" + "      \"state\": \"Surrey\",\n"
             + "      \"postcode\": \"TW9 1DN\",\n" + "      \"countryIsoCode\": \"GBR\"\n" + "    }\n" + "  }\n" + "}";
     }
+
+
+
 
 
 }
