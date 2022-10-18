@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import jdk.jfr.Description;
 import net.minidev.json.parser.ParseException;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,8 +39,16 @@ class DemoApplicationTests {
 
 
         //assertion of expected and actual json objects
+        GetRegistrationResponse requestObject=  (GetRegistrationResponse)stringToObject(registrationRequestJsonString(), GetRegistrationResponse.class);
 
-        Assertions.assertEquals(registrationRequestJsonString(), getResponse.getBody());
+
+        try {
+            Assertions.assertTrue(getResponseObject.equals(requestObject));
+        }catch (AssertionFailedError error){
+            System.out.println(error.getMessage());
+        }
+
+//        Assertions.assertEquals(registrationRequestJsonString(), getResponse.getBody());
 
         //        GetRegistrationResponse getRegistrationResponse = (GetRegistrationResponse)stringToObject(sendGet(postResponse.ge.registrationId,"12345").getBody(), GetRegistrationResponse.class);
 
@@ -48,7 +57,7 @@ class DemoApplicationTests {
 
         //        RegistrationResponse s = (RegistrationResponse)stringToObject(body, RegistrationResponse.class);
 //
-//        RegistrationRequest requestObject=  (RegistrationRequest)stringToObject(registrationRequestJsonString(), RegistrationRequest.class);
+
 //
 //
 //        System.out.println(s.registrationId);

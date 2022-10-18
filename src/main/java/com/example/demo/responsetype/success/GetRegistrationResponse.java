@@ -4,6 +4,7 @@ import com.example.demo.registration.RegistrationRequest;
 import com.example.demo.types.Organization;
 import com.example.demo.types.Person;
 
+import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
@@ -48,4 +49,26 @@ public class GetRegistrationResponse {
     }
 
 
+
+
+    public boolean equals(GetRegistrationResponse passedResponseObject) {
+
+        if(this.person.equals(passedResponseObject.person) &&
+            this.registrationDate.equals(passedResponseObject.registrationDate)&&
+
+            this.organisation.equals(passedResponseObject.organisation))
+
+            if(this.locale != null && passedResponseObject.locale != null) {
+                if (this.locale.equals(passedResponseObject.locale)) {
+                }
+            }
+
+            if(this.id != null && passedResponseObject.id != null)
+                if(this.id.equals(passedResponseObject.id))
+
+
+            return true;
+
+        return false;
+    }
 }
