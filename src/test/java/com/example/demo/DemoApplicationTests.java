@@ -7,6 +7,7 @@ import static com.example.demo.utility.PostGetRequest.sendPost;
 import com.example.demo.registration.RegistrationRequest;
 import com.example.demo.responsetype.success.GetRegistrationResponse;
 import com.example.demo.responsetype.success.RegistrationResponse;
+import java.util.Objects;
 import org.junit.jupiter.api.Assertions;
 import jdk.jfr.Description;
 import net.minidev.json.parser.ParseException;
@@ -48,7 +49,9 @@ class DemoApplicationTests {
             System.out.println(error.getMessage());
         }
 
-//        Assertions.assertEquals(registrationRequestJsonString(), getResponse.getBody());
+        GetRegistrationResponse temp  = null;
+
+        //        Assertions.assertEquals(registrationRequestJsonString(), getResponse.getBody());
 
         //        GetRegistrationResponse getRegistrationResponse = (GetRegistrationResponse)stringToObject(sendGet(postResponse.ge.registrationId,"12345").getBody(), GetRegistrationResponse.class);
 

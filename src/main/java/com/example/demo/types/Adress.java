@@ -40,4 +40,8 @@ public class Adress {
     @Size(min = 1)
     public String countryIsoCode;
 
+    public boolean equals(Adress passedObject){
+        return true;
+    }
+
 }

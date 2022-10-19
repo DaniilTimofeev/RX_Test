@@ -55,19 +55,20 @@ public class GetRegistrationResponse {
 
         if(this.person.equals(passedResponseObject.person) &&
             this.registrationDate.equals(passedResponseObject.registrationDate)&&
+            this.organisation.equals(passedResponseObject.organisation)) {
 
-            this.organisation.equals(passedResponseObject.organisation))
 
-            if(this.locale != null && passedResponseObject.locale != null) {
-                if (this.locale.equals(passedResponseObject.locale)) {
-                }
-            }
+            if (this.locale != null && passedResponseObject.locale != null)
+                if (!this.locale.equals(passedResponseObject.locale))
+                    return false;
 
-            if(this.id != null && passedResponseObject.id != null)
-                if(this.id.equals(passedResponseObject.id))
+            if (this.id != null && passedResponseObject.id != null)
+                if (!this.id.equals(passedResponseObject.id))
+                    return false;
 
 
             return true;
+        }
 
         return false;
     }
