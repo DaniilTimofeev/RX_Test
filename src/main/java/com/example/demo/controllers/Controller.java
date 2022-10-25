@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.database.ObjectIO;
 import com.example.demo.registration.RegistrationRequest;
 import com.example.demo.responsetype.errors.Error;
 import com.example.demo.responsetype.errors.ErrorWrapper;
@@ -15,22 +16,20 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.UUID;
+import static com.example.demo.database.ObjectIO.ReadObjectFromFile;
+import static com.example.demo.database.ObjectIO.WriteObjectToFile;
 
 
 @RestController
 public class Controller {
-    private final HashMap<String, GetRegistrationResponse> repository;
 
-    Controller() {
-        repository = new HashMap<>();
-    }
 
     @GetMapping("/api/v1/registrations/{registrationId}")
     public ResponseEntity<?> getController(@PathVariable String registrationId,
                                            @NotNull @NotEmpty @RequestHeader(value = "x-correlationid") String x_correlationid) {
-        ResponseEntity entity;
+
         try {
-            GetRegistrationResponse responseOBJ = repository.get(x_correlationid);
+            GetRegistrationResponse responseOBJ =  (GetRegistrationResponse)ReadObjectFromFile(x_correlationid);
             if (responseOBJ.id.equals(registrationId) == false)
                 throw new NullPointerException();
 
@@ -47,10 +46,19 @@ public class Controller {
     public ResponseEntity<?> postController(@Valid @RequestBody RegistrationRequest request, @RequestHeader(value = "x-correlationid") String x_correlationid) {
 
         String userUUID = UUID.randomUUID().toString();
-        if (request.registrationDate == null)
-            repository.put(x_correlationid, new GetRegistrationResponse(request, userUUID));
-        else
-            repository.put(x_correlationid, new GetRegistrationResponse(request, userUUID, request.registrationDate));
+        System.out.println("Sdfasfsdfdsafdasfasdfdsaf");
+        if (request.registrationDate == null) {
+            GetRegistrationResponse data = new GetRegistrationResponse(request, userUUID);
+//            repository.put(x_correlationid, data);
+            System.out.println("here");
+            WriteObjectToFile(x_correlationid, data);
+        }else {
+
+            GetRegistrationResponse data = new GetRegistrationResponse(request, userUUID, request.registrationDate);
+            WriteObjectToFile(x_correlationid, data);
+//            repository.put(x_correlationid, data);
+            System.out.println("here");
+        }
         return new ResponseEntity<>(new RegistrationResponse(userUUID), HttpStatus.CREATED);
 
     }
@@ -59,14 +67,14 @@ public class Controller {
     @DeleteMapping("/api/v1/registrations/{registrationId}")
     public ResponseEntity<?> deleteRegistered(@PathVariable String registrationId,
                                               @NotNull @NotEmpty @RequestHeader(value = "x-correlationid") String x_correlationid) {
-        try {
-            if (repository.get(x_correlationid).id.equals(registrationId))
-                repository.remove(x_correlationid);
-            else
-                throw new NullPointerException();
-        } catch (NullPointerException ex) {
-            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
-        }
+//        try {
+//            if (repository.get(x_correlationid).id.equals(registrationId))
+//                repository.remove(x_correlationid);
+//            else
+//                throw new NullPointerException();
+//        } catch (NullPointerException ex) {
+//            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+//        }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

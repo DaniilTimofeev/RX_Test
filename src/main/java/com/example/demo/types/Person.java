@@ -4,8 +4,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
-public class Person {
+public class Person implements Serializable {
         /*required:
           - email
           - firstName

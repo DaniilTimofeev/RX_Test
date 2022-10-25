@@ -3,8 +3,9 @@ package com.example.demo.types;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
-public class Organization {
+public class Organization implements Serializable {
     /*required:
     - address
     - name

@@ -2,9 +2,10 @@ package com.example.demo.types;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 
-public class Adress {
+public class Adress implements Serializable {
         /* required:
            - addressLine1
            - countryIsoCode

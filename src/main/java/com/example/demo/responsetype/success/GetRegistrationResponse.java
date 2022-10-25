@@ -6,11 +6,12 @@ import com.example.demo.types.Person;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class GetRegistrationResponse {
+public class GetRegistrationResponse implements Serializable {
         /*required:
         - person
         - registrationDate
